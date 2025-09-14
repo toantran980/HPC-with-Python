@@ -85,8 +85,8 @@ if __name__ == "__main__":
         except NameError:
             X_data = np.random.randn(1000, 1000)
        
-        X32 = t.tensor(X_data, dtype=torch.float32)
-        X64 = t.tensor(X_data, dtype=torch.float64)
+        X32 = t.tensor(X_data, dtype=t.float32)
+        X64 = t.tensor(X_data, dtype=t.float64)
         # 32-bit
         start = time.time()
         result32 = t.matmul(X32, X32)

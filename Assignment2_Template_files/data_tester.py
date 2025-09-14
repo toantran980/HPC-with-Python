@@ -84,8 +84,7 @@ if __name__ == "__main__":
             X_data = X
         except NameError:
             X_data = np.random.randn(1000, 1000)
-        import torch
-        import time
+       
         X32 = torch.tensor(X_data, dtype=torch.float32)
         X64 = torch.tensor(X_data, dtype=torch.float64)
         # 32-bit

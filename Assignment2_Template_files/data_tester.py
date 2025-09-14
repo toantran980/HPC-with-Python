@@ -17,33 +17,39 @@ if __name__ == "__main__":
     # Test data loading
     print('Testing data loading...')
     try:
-        data_list = load_dataset('Assignment2_Template_files/GasProperties.csv')
+        data_list = load_dataset('GasProperties.csv')
         print(f'Loaded {len(data_list)} rows (list of lists)')
     except Exception as e:
         print('load_dataset failed:', e)
     try:
-        data_np = load_dataset_np('Assignment2_Template_files/GasProperties.csv')
+        data_np = load_dataset_np('GasProperties.csv')
         print(f'Loaded {data_np.shape[0]} rows (NumPy array)')
     except Exception as e:
         print('load_dataset_np failed:', e)
     try:
-        data_pd = load_dataset_pd('Assignment2_Template_files/GasProperties.csv')
+        data_pd = load_dataset_pd('GasProperties.csv')
         print(f'Loaded {data_pd.shape[0]} rows (Pandas DataFrame)')
     except Exception as e:
         print('load_dataset_pd failed:', e)
 
     # Test normalization
-    print('\nTesting normalization...')
+    # Test normalization
+    print('\nTesting normalization with timing...')
     try:
+        start = time.perf_counter()
         nrows = normalize_array(data_list)
-        print(f'normalize_array processed {nrows} rows')
+        elapsed = time.perf_counter() - start
+        print(f'normalize_array processed {nrows} rows in {elapsed:.4f} seconds')
     except Exception as e:
         print('normalize_array failed:', e)
+
     try:
+        start = time.perf_counter()
         nrows_np = normalize_array_np(data_np)
-        print(f'normalize_array_np processed {nrows_np} rows')
+        elapsed = time.perf_counter() - start
+        print(f'normalize_array_np processed {nrows_np} rows in {elapsed:.4f} seconds')
     except Exception as e:
-        print('normalize_array_np failed:', e)
+        print('normalize_array_np failed:', e)    
 
     # Test splitting
     print('\nTesting split_xy and split_training_test...')

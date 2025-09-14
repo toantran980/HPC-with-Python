@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import torch as t
 import time
-''' '''
+
 from data_loader import (
     load_dataset, load_dataset_np, normalize_array, normalize_array_np,
     load_dataset_pd, split_xy, split_training_test
@@ -14,7 +14,6 @@ from vector_product import (
 
 
 if __name__ == "__main__":
-    pass
     # Test data loading
     print('Testing data loading...')
     try:

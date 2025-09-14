@@ -85,15 +85,15 @@ if __name__ == "__main__":
         except NameError:
             X_data = np.random.randn(1000, 1000)
        
-        X32 = torch.tensor(X_data, dtype=torch.float32)
-        X64 = torch.tensor(X_data, dtype=torch.float64)
+        X32 = t.tensor(X_data, dtype=t.float32)
+        X64 = t.tensor(X_data, dtype=t.float64)
         # 32-bit
         start = time.time()
-        result32 = torch.matmul(X32, X32)
+        result32 = t.matmul(X32, X32)
         time32 = time.time() - start
         # 64-bit
         start = time.time()
-        result64 = torch.matmul(X64, X64)
+        result64 = t.matmul(X64, X64)
         time64 = time.time() - start
         print(f"32-bit time: {time32:.6f} s, 64-bit time: {time64:.6f} s")
         if abs(time32 - time64) > 1e-3:

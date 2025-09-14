@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import torch as t
 import time
-''' '''
+
 from data_loader import (
     load_dataset, load_dataset_np, normalize_array, normalize_array_np,
     load_dataset_pd, split_xy, split_training_test
@@ -14,7 +14,6 @@ from vector_product import (
 
 
 if __name__ == "__main__":
-    pass
     # Test data loading
     print('Testing data loading...')
     try:
@@ -76,3 +75,31 @@ if __name__ == "__main__":
         print('dot_product_t:', dot_product_t(A_t[0], B_t[0]))
     except Exception as e:
         print('Vector/matrix operation failed:', e)
+
+    # Matrix multiplication: 32-bit vs 64-bit precision
+    print('\nMatrix multiplication: 32-bit vs 64-bit precision')
+    try:
+        # Use X from split_xy if available, else generate random
+        try:
+            X_data = X
+        except NameError:
+            X_data = np.random.randn(1000, 1000)
+        import torch
+        import time
+        X32 = torch.tensor(X_data, dtype=torch.float32)
+        X64 = torch.tensor(X_data, dtype=torch.float64)
+        # 32-bit
+        start = time.time()
+        result32 = torch.matmul(X32, X32)
+        time32 = time.time() - start
+        # 64-bit
+        start = time.time()
+        result64 = torch.matmul(X64, X64)
+        time64 = time.time() - start
+        print(f"32-bit time: {time32:.6f} s, 64-bit time: {time64:.6f} s")
+        if abs(time32 - time64) > 1e-3:
+            print("64-bit (float64) operations are usually slower than 32-bit (float32) because they require more memory and computational resources. Most consumer hardware is optimized for 32-bit operations, so 64-bit math can be significantly slower.")
+        else:
+            print("Computation times are similar; this may be due to small matrix size or hardware with strong double-precision support.")
+    except Exception as e:
+        print('Matrix multiplication precision comparison failed:', e)

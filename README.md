@@ -35,7 +35,20 @@ Assignment 2/
    ```
    pip install numpy pandas torch typeguard
    ```
+
 3. **Run and test your scripts as needed.**
+
+---
+
+## Matrix Multiplication Precision Comparison
+
+To compare matrix multiplication using 32-bit and 64-bit precision:
+
+- Run `data_tester.py` to perform matrix multiplication on your feature matrix (`X_data`) using both 32-bit and 64-bit precision.
+- The script will print computation times for both and explain any observed difference.
+- Typical result: 64-bit (float64) operations are slower than 32-bit (float32) due to higher memory and computational requirements. Most consumer hardware is optimized for 32-bit operations.
+
+---
 
 ---
 

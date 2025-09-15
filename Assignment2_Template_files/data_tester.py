@@ -33,7 +33,6 @@ if __name__ == "__main__":
         print('load_dataset_pd failed:', e)
 
     # Test normalization
-    # Test normalization
     print('\nTesting normalization with timing...')
     try:
         start = time.perf_counter()

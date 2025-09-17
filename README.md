@@ -14,16 +14,16 @@ Assignment 2/
 │   ├── data_process1.py
 │   ├── data_process2.py
 │   ├── data_tester.py
-│   ├── vector_product.py
-│   └── GasProperties.csv
+│   └── vector_product.py
+├── GasProperties.csv           # Dataset now at repository root
 ├── Assignment2_HPC_Python.pdf  # Assignment instructions
 └── README.md                   # Project documentation
 ```
 
-
 ## Setup Instructions
 
 1. **Create and activate a virtual environment:**
+
    ```
    python -m venv venv
    # On Windows PowerShell:
@@ -32,10 +32,10 @@ Assignment 2/
    venv\Scripts\activate.bat
    ```
 2. **Install required packages:**
+
    ```
    pip install numpy pandas torch typeguard
    ```
-
 3. **Run and test your scripts as needed.**
 
 ---
@@ -71,7 +71,7 @@ If you use VS Code and have a `.vscode/settings.json` file with a Python interpr
 - `data_process1.py`, `data_process2.py`: Where you implement and test functions before migrating to `data_loader.py`.
 - `vector_product.py`: Functions for dot product and matrix operations.
 - `data_tester.py`: Script to test your functions.
-- `GasProperties.csv`: Dataset for processing.
+- `GasProperties.csv`: Dataset for processing (moved to project root). Update any scripts in `Assignment2_Template_files/` to use a path like `../GasProperties.csv` or use the robust path builder in `data_tester.py`.
 
 ## Notes
 
@@ -81,4 +81,8 @@ If you use VS Code and have a `.vscode/settings.json` file with a Python interpr
 
 ## Author
 
-- Your Name Here
+Toan Tran [ttran8276@csu.fullerton.edu](mailto:ttran8276@csu.fullerton.edu)
+
+Zero Tsang [ztsang@csu.fullerton.edu](mailto:ztsang@csu.fullerton.edu)
+
+Joseph Rangel [josephrangel@csu.fullerton.edu](mailto:josephrangel@csu.fullerton.edu)

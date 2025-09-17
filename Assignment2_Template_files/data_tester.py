@@ -1,3 +1,4 @@
+
 import numpy as np
 import pandas as pd
 import torch as t
@@ -84,14 +85,28 @@ if __name__ == "__main__":
     # Matrix multiplication: 32-bit vs 64-bit precision
     print('\nMatrix multiplication: 32-bit vs 64-bit precision')
     try:
-        # Use X from split_xy if available, else generate random
+        # Use X from split_xy if available, else fallback to a reasonably-sized random square matrix
         try:
             X_data = X
         except NameError:
             X_data = np.random.randn(1000, 1000)
-       
-        X32 = t.tensor(X_data, dtype=t.float32)
-        X64 = t.tensor(X_data, dtype=t.float64)
+
+        # Choose a square size for benchmarking. Prefer a slice from X_data when possible.
+        preferred_size = 256
+        k = min(preferred_size, X_data.shape[0], X_data.shape[1])
+        if k < 2:
+            # Data is too narrow; fall back to a small random matrix
+            A = np.random.randn(4, 4)
+        else:
+            # If X_data is large enough in both dims, take a top-left k x k slice; otherwise use a random k x k
+            if X_data.shape[0] >= k and X_data.shape[1] >= k:
+                A = X_data[:k, :k].astype(float)
+            else:
+                A = np.random.randn(k, k)
+
+        X32 = t.tensor(A, dtype=t.float32)
+        X64 = t.tensor(A, dtype=t.float64)
+
         # 32-bit
         start = time.time()
         result32 = t.matmul(X32, X32)
@@ -107,3 +122,4 @@ if __name__ == "__main__":
             print("Computation times are similar; this may be due to small matrix size or hardware with strong double-precision support.")
     except Exception as e:
         print('Matrix multiplication precision comparison failed:', e)
+    
